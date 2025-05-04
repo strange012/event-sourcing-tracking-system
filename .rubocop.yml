@@ -1,0 +1,99 @@
+plugins:
+  - rubocop-factory_bot
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'bin/*'
+    - 'tmp/**/*'
+    - 'db/**/*'
+    - 'vendor/**/*'
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/LineLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/HashAsLastArrayItem:
+  EnforcedStyle: no_braces
+
+Style/SafeNavigation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 1000
+
+Metrics/BlockNesting:
+  Max: 5
+
+Naming/MethodParameterName:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+Naming/VariableNumber:
+  CheckSymbols: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/SpecFilePathFormat:
+  CustomTransform:
+    PayPal: paypal
+
+Rails/Delegate:
+  Enabled: false
+
+Rails/IndexWith:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - staging
+    - development
+    - test
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Max: 10
+  MaxOptionalParameters: 10
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
