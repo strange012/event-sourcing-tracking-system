@@ -23,7 +23,6 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://postgres:password@db:5432/ats_development
       RAILS_ENV: development
 
 volumes:

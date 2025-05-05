@@ -5,13 +5,17 @@ class Job < ApplicationRecord
 
   has_many :events, class_name: 'Job::Event', dependent: :destroy
   has_many :applications, dependent: :destroy
+  has_many :hired_applications, -> { hired }, class_name: 'Application'
+  has_many :rejected_applications, -> { rejected }, class_name: 'Application'
+  has_many :ongoing_applications, -> { ongoing }, class_name: 'Application'
+  has_one :last_event, -> { last_events }, class_name: 'Job::Event'
 
-  scope :activated, -> { joins(:events).merge(Job::Event.last_for_job.activated) }
+  scope :with_last_events, ->(table_name) { with(table_name => Job::Event.last_events).joins("left join #{table_name} on jobs.id = #{table_name}.job_id") }
+  scope :activated, -> { with_last_events('last_activated_events').where(last_activated_events: { type: 'Job::Event::Activated' }) }
 
   pg_search_scope :search_by, against: %i[title description]
 
   def status
-    last_event = events.order(:created_at).last
     return 'deactivated' unless last_event
     return 'deactivated' if last_event.is_a?(Job::Event::Deactivated)
 
@@ -27,14 +31,14 @@ class Job < ApplicationRecord
   end
 
   def hired_candidates_count
-    applications.hired.count
+    hired_applications.size
   end
 
   def rejected_candidates_count
-    applications.rejected.count
+    rejected_applications.size
   end
 
   def ongoing_candidates_count
-    applications.ongoing.count
+    ongoing_applications.size
   end
 end

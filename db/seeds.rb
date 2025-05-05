@@ -19,23 +19,28 @@ end
 
 def create_application_events(application, count)
   count.times do |idx|
-    application_event_factory = if idx != count - 1
-                                  idx.even? ? :application_event_note : :application_event_interview
-                                else
-                                  idx.even? ? :application_event_rejected : :application_event_hired
+    application_event_factory = case idx % 4
+                                when 0
+                                  :application_event_interview
+                                when 1
+                                  :application_event_note
+                                when 2
+                                  :application_event_hired
+                                when 3
+                                  :application_event_rejected
                                 end
     create(application_event_factory, application:)
   end
 end
 
-jobs = create_jobs(3)
+jobs = create_jobs(10)
 puts "\t ##### JOBS CREATED! ##### "
-jobs.zip([0, 1, 2]).map { |job, event_count| [job, create_job_events(job, event_count)] }
+jobs.zip(0..9).map { |job, event_count| [job, create_job_events(job, event_count)] }
 puts "\t ##### JOB EVENTS CREATED! ##### "
 
-applications = jobs.zip([0, 1, 3]).map { |job, application_count| create_applications(job, application_count) }.flatten
+applications = jobs.zip(0..9).map { |job, application_count| create_applications(job, application_count) }.flatten
 puts "\t ##### APPLICATIONS CREATED! ##### "
-applications.zip([0, 1, 2, 3]).map do |application, event_count|
+applications.zip(0..45).map do |application, event_count|
   [application, create_application_events(application, event_count)]
 end
 puts "\t ##### APPLICATION EVENTS CREATED! ##### "

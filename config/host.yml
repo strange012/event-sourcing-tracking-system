@@ -1,0 +1,7 @@
+development:
+  host: <%= ENV['WEB_HOST'] || 'localhost' %>
+  port: <%= ENV['WEB_PORT'] || '3000' %>
+
+test:
+  host: <%= ENV['WEB_HOST'] || 'localhost' %>
+  port: <%= ENV['WEB_PORT'] || '3001' %>

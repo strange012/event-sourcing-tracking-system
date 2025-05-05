@@ -15,8 +15,8 @@ class ApplicationController < ActionController::API
 
   def render_success(blueprint, scope)
     scope = paginated(scope) if scope.is_a?(Enumerable)
-    render json: blueprint.render(scope, root: :data, meta: MetaBlueprint.render_as_hash(scope:),
-                                         includes: includes_params)
+    render json: blueprint.render(scope.preload_blueprint, root: :data, meta: MetaBlueprint.render_as_hash(scope:),
+                                                           includes: includes_params)
   end
 
   def render_error(error)
@@ -25,8 +25,6 @@ class ApplicationController < ActionController::API
   end
 
   def paginated(scope)
-    return scope unless params[:page]
-
     scope.page(params.dig(:page, :number) || 1).per(params.dig(:page, :size) || DEFAULT_PAGE_SIZE)
   end
 end

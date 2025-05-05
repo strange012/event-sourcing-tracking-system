@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "49f14092-f88c-4083-9c6e-6e27c9fb7111",
+		"name": "Applicant Tracking System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3183011"
+	},
+	"item": [
+		{
+			"name": "List Jobs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/jobs?page[number]=1&page[size]=100&includes[]=hired_candidates_count&includes[]=rejected_candidates_count&includes[]=ongoing_candidates_count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"jobs"
+					],
+					"query": [
+						{
+							"key": "q[search_by]",
+							"value": "officer",
+							"disabled": true
+						},
+						{
+							"key": "page[number]",
+							"value": "1"
+						},
+						{
+							"key": "page[size]",
+							"value": "100"
+						},
+						{
+							"key": "includes[]",
+							"value": "hired_candidates_count"
+						},
+						{
+							"key": "includes[]",
+							"value": "rejected_candidates_count"
+						},
+						{
+							"key": "includes[]",
+							"value": "ongoing_candidates_count"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Applications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/applications?page[number]=1&page[size]=100&includes[]=notes_count&includes[]=last_interview_at",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"applications"
+					],
+					"query": [
+						{
+							"key": "q[search_by]",
+							"value": "glory",
+							"disabled": true
+						},
+						{
+							"key": "page[number]",
+							"value": "1"
+						},
+						{
+							"key": "page[size]",
+							"value": "100"
+						},
+						{
+							"key": "includes[]",
+							"value": "notes_count"
+						},
+						{
+							"key": "includes[]",
+							"value": "last_interview_at"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

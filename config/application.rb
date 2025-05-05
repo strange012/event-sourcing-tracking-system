@@ -8,6 +8,12 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+def host_with_port(host_config)
+  host, port = host_config.values_at(:host, :port)
+
+  [host, port].compact_blank.join(':')
+end
+
 module App
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -30,5 +36,8 @@ module App
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.web_host = config_for(:host)
+    config.web_host['host_with_port'] = host_with_port(config.web_host)
   end
 end

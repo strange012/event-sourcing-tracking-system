@@ -91,4 +91,8 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
+
+  config.before(:each, type: :request) do
+    default_url_options[:host] = Rails.configuration.web_host['host_with_port']
+  end
 end

@@ -91,6 +91,9 @@ Rails/UnknownEnv:
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 
+Rails/InverseOf:
+  Enabled: false
+
 Metrics/ParameterLists:
   Max: 10
   MaxOptionalParameters: 10
